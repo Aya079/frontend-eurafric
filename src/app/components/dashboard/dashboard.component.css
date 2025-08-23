@@ -1,0 +1,96 @@
+/* Container principal */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Menu latéral */
+.sidebar {
+  width: 220px;
+  background-color: #1e3c72; /* bleu foncé */
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.sidebar ul li a:hover {
+  color: #ffcc00;
+}
+
+/* Contenu principal */
+.main-content {
+  flex: 1;
+  background-color: #f5f7fa; /* blanc légèrement gris */
+  padding: 40px;
+}
+
+/* Header */
+header h1 {
+  color: #1e3c72;
+  margin-bottom: 5px;
+}
+
+header p {
+  color: #555;
+  margin-bottom: 30px;
+}
+
+/* Cartes */
+.cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1 1 calc(33% - 20px);
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Couleurs spécifiques aux cartes */
+.chat-card { border-top: 4px solid #4caf50; }
+.notifications-card { border-top: 4px solid #ff9800; }
+.reports-card { border-top: 4px solid #2196f3; }
+
+.card h3 {
+  color: #1e3c72;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #555;
+}

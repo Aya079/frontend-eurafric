@@ -1,0 +1,26 @@
+<div class="notifications-container">
+  <h2>Centre de Notifications</h2>
+
+  <ng-container *ngIf="notificationsService.notifications$ | async as notifications">
+
+    <div class="counters">
+      <div class="counter total">Total: {{ total(notifications) }}</div>
+      <div class="counter unread">Non lues: {{ unread(notifications) }}</div>
+    </div>
+
+    <div class="filters">
+      <button (click)="setFilter('all')" [class.active]="filter==='all'">Toutes</button>
+      <button (click)="setFilter('unread')" [class.active]="filter==='unread'">Non lues</button>
+    </div>
+
+    <ul class="notification-list">
+      <li *ngFor="let n of filteredNotifications(notifications)" [class.unread]="!n.read">
+        <strong>{{ n.title }}</strong>
+        <p>{{ n.content }}</p>
+        <small>{{ n.date | date:'short' }}</small>
+        <button *ngIf="!n.read" (click)="markAsRead(n)">Marquer comme lue</button>
+      </li>
+    </ul>
+
+  </ng-container>
+</div>

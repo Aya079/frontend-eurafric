@@ -1,0 +1,33 @@
+<div class="chat-container">
+  <!-- Liste des conversations -->
+  <aside class="conversation-list">
+    <h3>Conversations</h3>
+    <ul>
+      <li *ngFor="let conv of conversations"
+          (click)="selectConversation(conv)"
+          [class.active]="conv === activeConversation">
+        {{ conv.name }}
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Zone de messagerie -->
+  <section class="chat-window">
+    <div class="chat-header">
+      <h3 *ngIf="activeConversation">{{ activeConversation.name }}</h3>
+    </div>
+
+    <div class="messages">
+      <div *ngFor="let msg of messages" class="message" [class.own]="msg.sender === currentUser">
+        <strong>{{ msg.sender }}:</strong> {{ msg.content }}
+      </div>
+    </div>
+
+    <form class="chat-input" (ngSubmit)="sendMessage()">
+      <input type="text" placeholder="Écrire un message..." [(ngModel)]="newMessage" name="message"/>
+      <button type="button" (click)="addEmoji('😊')">😊</button>
+      <button type="button" (click)="addAttachment()">📎</button>
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
+</div>

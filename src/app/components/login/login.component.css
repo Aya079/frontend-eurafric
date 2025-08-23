@@ -1,0 +1,73 @@
+/* Fond bleu dégradé */
+.login-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  font-family: Arial, sans-serif;
+}
+
+/* Boîte blanche au centre */
+.login-box {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  width: 350px;
+  text-align: center;
+}
+
+/* Logo */
+.logo {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+/* Titre */
+h2 {
+  color: #1e3c72;
+  margin-bottom: 30px;
+}
+
+/* Groupes de champs */
+.input-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #1e3c72;
+}
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Bouton */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #1e3c72;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+button:hover {
+  background-color: #16335a;
+}
+
+/* Message d'erreur */
+.error {
+  color: red;
+  margin-top: 15px;
+  font-size: 14px;
+}

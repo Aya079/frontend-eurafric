@@ -1,0 +1,36 @@
+<div class="dashboard-container">
+  <!-- Menu latéral -->
+  <nav class="sidebar">
+    <div class="logo">EURAFRIC</div>
+    <ul>
+      <li><a routerLink="/dashboard">Accueil</a></li>
+      <li><a routerLink="/chat">Chat</a></li>
+      <li><a routerLink="/notifications">Notifications</a></li>
+      <li><a routerLink="/reports">Reports</a></li>
+    </ul>
+  </nav>
+
+  <!-- Contenu principal -->
+  <div class="main-content">
+    <header>
+      <h1>Bienvenue, {{ userName }} !</h1>
+      <p>Voici un aperçu de votre activité</p>
+    </header>
+
+    <!-- Cartes principales -->
+    <div class="cards">
+      <div class="card chat-card">
+        <h3>Chat</h3>
+        <p>Messages récents</p>
+      </div>
+      <div class="card notifications-card">
+        <h3>Notifications</h3>
+        <p>Notifications non lues</p>
+      </div>
+      <div class="card reports-card">
+        <h3>Rapports</h3>
+        <p>Rapports en attente</p>
+      </div>
+    </div>
+  </div>
+</div>
