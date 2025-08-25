@@ -17,8 +17,6 @@ export class DashboardComponent {
 
   ngOnInit() {
     const user = this.authService.getCurrentUser();
-    if (user) {
-      this.userName = user.username; // affiche le vrai utilisateur connecté
-    }
+    this.userName = user?.username ?? '';
   }
 }

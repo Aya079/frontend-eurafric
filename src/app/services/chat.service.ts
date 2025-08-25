@@ -1,37 +1,23 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {AppConfig} from '../app.config';
+import {Observable} from 'rxjs';
+import {ChatMessage} from './chat-socket.service';
 
-export interface ChatMessage {
-  id?: number;
-  sender: string;
-  content: string;
-  room: string;
-  timeSent?: string;
-}
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class ChatService {
-  private baseUrl = 'http://localhost:8080/api/chat';
-  private messagesSubject = new BehaviorSubject<ChatMessage[]>([]);
-  messages$ = this.messagesSubject.asObservable();
+  private baseUrl = `${AppConfig.apiBaseUrl}/chat`;
 
-  constructor(private http: HttpClient) {}
-
-  // Charger l'historique
-  loadHistory(room: string) {
-    this.http.get<ChatMessage[]>(`${this.baseUrl}/history/${room}`)
-      .subscribe(msgs => this.messagesSubject.next(msgs));
+  constructor(private http: HttpClient) {
   }
 
-  // Envoyer un message et l’ajouter à l’historique
-  sendMessage(msg: ChatMessage) {
-    this.http.post<ChatMessage>(this.baseUrl, msg)
-      .subscribe(saved => {
-        const current = this.messagesSubject.value;
-        this.messagesSubject.next([...current, saved]);
-      });
+  // Récupérer l’historique par “room”
+  getHistory(room: string): Observable<ChatMessage[]> {
+    return this.http.get<ChatMessage[]>(`${this.baseUrl}/history/${encodeURIComponent(room)}`);
+  }
+
+  // (optionnel) Envoyer via REST au lieu du WebSocket
+  postMessage(msg: ChatMessage): Observable<ChatMessage> {
+    return this.http.post<ChatMessage>(this.baseUrl, msg);
   }
 }

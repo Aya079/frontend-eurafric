@@ -23,16 +23,27 @@ export class LoginComponent {
   }
 
   login() {
-    if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (res) => {
-          console.log('Utilisateur connecté:', res);
-          this.router.navigate(['/dashboard']); // À créer plus tard
-        },
-        error: (err) => {
-          this.errorMessage = err.error.error || 'Erreur de connexion';
-        }
-      });
+    if (this.loginForm.invalid) {
+      this.errorMessage = 'Veuillez remplir tous les champs';
+      return;
     }
+
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (user) => {
+        console.log('Utilisateur connecté:', user);
+        this.errorMessage = '';
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          this.errorMessage = 'Identifiants incorrects';
+        } else if (err.error && typeof err.error === 'object') {
+          this.errorMessage = err.error.error || 'Erreur de connexion';
+        } else {
+          this.errorMessage = 'Impossible de se connecter au serveur';
+        }
+        console.error('Erreur login component:', err);
+      }
+    });
   }
 }

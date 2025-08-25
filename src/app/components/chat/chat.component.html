@@ -1,33 +1,42 @@
 <div class="chat-container">
-  <!-- Liste des conversations -->
-  <aside class="conversation-list">
-    <h3>Conversations</h3>
-    <ul>
-      <li *ngFor="let conv of conversations"
-          (click)="selectConversation(conv)"
-          [class.active]="conv === activeConversation">
-        {{ conv.name }}
+  <!-- Sidebar -->
+  <div class="chat-sidebar">
+    <input type="text" placeholder="Rechercher..." class="search-box">
+    <ul class="contact-list">
+      <li *ngFor="let c of conversations" (click)="selectConversation(c)"
+          [class.active]="c.id === activeConversation.id">
+        <span class="status online"></span>
+        {{ c.name }}
       </li>
     </ul>
-  </aside>
+  </div>
 
-  <!-- Zone de messagerie -->
-  <section class="chat-window">
+  <!-- Main Chat -->
+  <div class="chat-main">
     <div class="chat-header">
-      <h3 *ngIf="activeConversation">{{ activeConversation.name }}</h3>
+      <div>Connecté en : <strong>{{ currentUser }}</strong></div>
+      <div>Salon : <strong>{{ activeConversation.name }}</strong></div>
     </div>
 
-    <div class="messages">
-      <div *ngFor="let msg of messages" class="message" [class.own]="msg.sender === currentUser">
-        <strong>{{ msg.sender }}:</strong> {{ msg.content }}
+    <div class="chat-messages messages">
+      <div *ngFor="let m of messages" [class.my-message]="m.sender === currentUser" class="message">
+        <div class="message-header">
+          <strong>{{ m.sender }}</strong>  <!-- ✅ Nom de l’expéditeur -->
+        </div>
+        <div class="message-content">
+          {{ m.content }}
+        </div>
+        <div class="message-time" *ngIf="m.timeSent">
+          {{ m.timeSent | date:'shortTime' }}
+        </div>
       </div>
     </div>
 
-    <form class="chat-input" (ngSubmit)="sendMessage()">
-      <input type="text" placeholder="Écrire un message..." [(ngModel)]="newMessage" name="message"/>
-      <button type="button" (click)="addEmoji('😊')">😊</button>
+    <div class="chat-input composer">
+      <input [(ngModel)]="newMessage" placeholder="Votre message..." />
+      <button type="button" (click)="addEmoji('🙂')">🙂</button>
       <button type="button" (click)="addAttachment()">📎</button>
-      <button type="submit">Envoyer</button>
-    </form>
-  </section>
+      <button type="button" class="send-btn" (click)="sendMessage()">Envoyer</button>
+    </div>
+  </div>
 </div>
